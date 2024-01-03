@@ -8,7 +8,7 @@
  * @brief Matrix est une classe qui représente un matrice carré de dimension constante égale à 4.
  * Elle se compose de :
  *      - 1 attribut privé :
- *          - data (float[4][4])
+ *          - \a data (float[4][4])
  *      - 2 constructeurs :
  *          - un constructeur par défaut
  *          - un constructeur qui a 16 float en entrée
@@ -38,7 +38,7 @@ class Matrix
         Matrix(const Matrix& mat);
 
         /**
-         * @brief Constructeur qui créer une matrice composée des 16 flottants en entrée.
+         * @brief Constructeur qui créé une matrice composée des 16 flottants en entrée.
          * 
          * @param a00 (float)
          * @param a01 (float)

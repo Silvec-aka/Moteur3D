@@ -2,7 +2,7 @@
 #define VECTOR3D_HPP
 
 #include <cmath>
-#include<SDL2/SDL.h>
+#include <SDL2/SDL.h>
 #include "matrix.hpp"
 
 /**

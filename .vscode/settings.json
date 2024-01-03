@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "format": "cpp",
-        "functional": "cpp"
+        "functional": "cpp",
+        "iosfwd": "cpp"
     }
 }

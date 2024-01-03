@@ -35,6 +35,19 @@ Matrix::Matrix(float a00, float a01, float a02, float a03,
     data[3][0] = a30; data[3][1] = a31; data[3][2] = a32; data[3][3] = a33;
 }
 
+Matrix Matrix::inverse()
+{
+    Matrix out;
+    out[{0,0}] = data[0][0] ; out[{0,1}] = data[1][0] ; out[{0,2}] = data[2][0] ; out[{0,3}] = 0.0f;
+    out[{1,0}] = data[0][1] ; out[{1,1}] = data[1][1] ; out[{1,2}] = data[2][1] ; out[{1,3}] = 0.0f;
+    out[{2,0}] = data[0][2] ; out[{2,1}] = data[1][2] ; out[{2,2}] = data[2][2] ; out[{2,3}] = 0.0f;
+    out[{3,0}] = -(data[3][0] * out[{0,0}] + data[3][1] * out[{1,0}] + data[3][2] * out[{2,0}]);
+    out[{3,1}] = -(data[3][0] * out[{0,1}] + data[3][1] * out[{1,1}] + data[3][2] * out[{2,1}]);
+    out[{3,2}] = -(data[3][0] * out[{0,2}] + data[3][1] * out[{1,2}] + data[3][2] * out[{2,2}]);
+    out[{3,3}] = 1.0f;
+    return out;
+}
+
 float& Matrix::operator[](std::pair<int, int> idx){
     return data[idx.first][idx.second];
 }
