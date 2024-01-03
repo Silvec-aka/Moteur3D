@@ -71,15 +71,16 @@ Vector3D Vector3D::crossProduct(const Vector3D& other_vect) const
     return Vector3D(y*other_vect.z - z*other_vect.y, z*other_vect.x - x*other_vect.z, x*other_vect.y - y*other_vect.x);
 }
 
-Vector3D Vector3D::multiplyVector3ByMatrix4(Vector3D vect_out, const Matrix& mat)
+Vector3D Vector3D::multiplyVector3ByMatrix(Vector3D vect_out, const Matrix& mat)
 {
     vect_out.set_x(x * mat[{0,0}] + y * mat[{1,0}] + z * mat[{2,0}] + p*mat[{3,0}]);
     vect_out.set_y(x * mat[{0,1}] + y * mat[{1,1}] + z * mat[{2,1}] + p*mat[{3,1}]);
     vect_out.set_z(x * mat[{0,2}] + y * mat[{1,2}] + z * mat[{2,2}] + p*mat[{3,2}]);
     vect_out.set_p(x * mat[{0,3}] + y * mat[{1,3}] + z * mat[{2,3}] + p*mat[{3,3}]);
+    return vect_out;
 }
 
-Vector3D Vector3D::multiplyVector3ByMatrix4(const Matrix& mat)
+Vector3D Vector3D::multiplyVector3ByMatrix(const Matrix& mat)
 {
     Vector3D out;
     out.set_x(x * mat[{0,0}] + y * mat[{1,0}] + z * mat[{2,0}] + p*mat[{3,0}]);

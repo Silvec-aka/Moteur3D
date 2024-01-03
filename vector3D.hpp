@@ -14,7 +14,7 @@
  *          - \a y (float)
  *          - \a z (float)
  *          - \a p (float)
- *      - 2 constructeurs :
+ *      - 1 constructeur :
  *          - un constructeur qui a 3 float en entrée
  *      - des getters/setters pour tout les attributs
  *      - 4 méthodes publiques :
@@ -145,7 +145,7 @@ class Vector3D
        * @param \a mat (Matrix)
        * @return \a vect_out, contenant le resulat du produit matriciel (vector3D)
       */
-      Vector3D multiplyVector3ByMatrix4(Vector3D vect_out, const Matrix& mat);
+      Vector3D multiplyVector3ByMatrix(Vector3D vect_out, const Matrix& mat);
 
       /**
        * @brief Calcule le produit matriciel entre le vecteur en instance et la matrice en paramètre.
@@ -153,7 +153,7 @@ class Vector3D
        * @param \a mat (Matrix)
        * @return le resulat du produit matriciel (vector3D)
       */
-      Vector3D multiplyVector3ByMatrix4(const Matrix& mat);
+      Vector3D multiplyVector3ByMatrix(const Matrix& mat);
 
       void operator+=(const Vector3D& vect);
       void operator-=(const Vector3D& vect);

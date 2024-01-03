@@ -151,7 +151,7 @@ class Triangle3D
         /**
          * @brief Transforme les coordonnées pour qu'elles soient affichables dans une fenêtre.
         */
-        void scaleToViewAndWindow(int window_w,int window_ht);
+        void scaleToViewAndWindow(int window_w,int window_h);
 
         /**
          * @brief Additionne le vecteur \a vect au trois points du triangle.
@@ -161,7 +161,7 @@ class Triangle3D
         /**
          * @brief Multiplie le floattant \a a au coordonnées des trois points du triangles.
         */
-        void operator*=(float a);
+        void operator*=(float f);
 
         Triangle3D operator=(const Triangle3D& t);
 
