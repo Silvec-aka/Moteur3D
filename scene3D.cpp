@@ -34,7 +34,7 @@ Scene3D::Scene3D()
         Triangle3D(Vector3D(1.0f, 0.0f, 1.0f),    Vector3D(0.0f, 0.0f, 0.0f),    Vector3D(1.0f, 0.0f, 0.0f)) 
     );
 
-    cube.tris = {face_sud,face_est,face_nord,face_ouest,face_top,face_bottom} ;
+    cube.tris = {face_sud,face_est,face_nord,face_ouest,face_top,face_bottom};
 
     meshs = std::vector<Mesh3D*>();
     meshs.push_back(&cube);

@@ -18,12 +18,11 @@ void process_input(Engine3D& engine){
             {
                 engine.Setrunning(false);
             }
-            break;
-            
+            break;        
     }
 }
 
-int main(int argv, char** args)
+int main()
 {
     Scene3D scene = Scene3D();
 

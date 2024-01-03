@@ -50,14 +50,19 @@ void Engine3D::Setrunning(bool _running)
 
 void Engine3D::render(float time, bool isAnimated)
 {
+    
 	std::vector<Mesh3D*> meshs = scene.getMeshs();
 
 	//On récupère les faces de chaque mesh
     std::vector<std::vector<Quad3D>> faces;
+
+    std::cerr<<"hello1"<<std::endl;
     for (int i=0; i< (int) meshs.size(); i++){
+        std::cerr<<faces.capacity()<<std::endl;
         faces.push_back(meshs[i]->tris)/*->getQuads()*/;//A CHANGER
     }
-
+    std::cerr<<"hello2"<<std::endl;
+    
     //On récupère les triangles de chaque face
     std::vector<Triangle3D> triangles;
     for (int i=0; i< (int) faces.size(); i++)
@@ -68,7 +73,6 @@ void Engine3D::render(float time, bool isAnimated)
             triangles.push_back(faces[i][j].quad[1]);
         }
     }
-
     //Défintion de la matrice (est normalisée donc renvoie toujours un résultat entre -1 et 1)
     Matrix matProj;
     matProj.initializeProj(window_width, window_height);
@@ -95,12 +99,12 @@ void Engine3D::render(float time, bool isAnimated)
         Triangle3D newTriangle = tri.clone(); //A CHANGER constructeur de copie
         newTriangle.i = tri.i;
 
-        newTriangle.p[0].multiplyVector3ByMatrix4(matRotX);
-        newTriangle.p[0].multiplyVector3ByMatrix4(matRotZ);
-        newTriangle.p[1].multiplyVector3ByMatrix4(matRotX);
-        newTriangle.p[1].multiplyVector3ByMatrix4(matRotZ);
-        newTriangle.p[2].multiplyVector3ByMatrix4(matRotX);
-        newTriangle.p[2].multiplyVector3ByMatrix4(matRotZ);
+        newTriangle.p[0].multiplyVector3ByMatrix(matRotX);
+        newTriangle.p[0].multiplyVector3ByMatrix(matRotZ);
+        newTriangle.p[1].multiplyVector3ByMatrix(matRotX);
+        newTriangle.p[1].multiplyVector3ByMatrix(matRotZ);
+        newTriangle.p[2].multiplyVector3ByMatrix(matRotX);
+        newTriangle.p[2].multiplyVector3ByMatrix(matRotZ);
 
         //calcul de la normal du triangle
         Vector3D normaltri, line1, line2;
@@ -135,9 +139,9 @@ void Engine3D::render(float time, bool isAnimated)
             if(eclairement<0.1) eclairement= 0.1;
             if(eclairement>1) eclairement= 1;
 
-            newTriangle.p[0].multiplyVector3ByMatrix4(matProj);
-            newTriangle.p[1].multiplyVector3ByMatrix4(matProj);
-            newTriangle.p[2].multiplyVector3ByMatrix4(matProj);
+            newTriangle.p[0].multiplyVector3ByMatrix(matProj);
+            newTriangle.p[1].multiplyVector3ByMatrix(matProj);
+            newTriangle.p[2].multiplyVector3ByMatrix(matProj);
 
             //newTriangle.scaleToViewAndWindow(window_width, window_height);
                 //A ENLEVER
