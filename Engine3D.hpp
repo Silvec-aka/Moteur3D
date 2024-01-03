@@ -6,14 +6,14 @@
 
 using namespace std;
 
-class Engine3D : 
+class Engine3D
 {
     private :
         /**
          * @brief Cette variable correspond à la scène à afficher.
          * Il est du type Scene.
          */
-        Scene scene;
+        Scene3D scene;
         /**
          * @brief L'attribut window est un pointeur vers une SDL_Window qui est la fenêtre de l'executable.
          * Il est du type SDL_Window*.
@@ -54,7 +54,7 @@ class Engine3D :
          * @param _window_height (const int)
          * @param _fov_factor 
          */
-        Engine3D(Scene& _scene, const int _window_width, const int _window_height, const float _fov_factor);
+        Engine3D(Scene3D& _scene, const int _window_width, const int _window_height, const float _fov_factor);
         /**
          * @brief Setter de l'attribut running.
          * 
@@ -96,7 +96,7 @@ class Engine3D :
          * @param color (SDL_Color)
          * @param illumination (float)
          */
-        void drawTriangle(SDL_Point v1, SDL_Point v2, SDL_Point v3, SDL_Color color, float illumination);
+        void drawTriangle(SDL_Point v1, SDL_Point v2, SDL_Point v3);
 };
 
 #endif 

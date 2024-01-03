@@ -4,7 +4,7 @@ using namespace std;
 
 
 
-Engine3D::Engine3D(Scene& _scene, const int _window_width, const int _window_height, const float _fov_factor)
+Engine3D::Engine3D(Scene3D& _scene, const int _window_width, const int _window_height, const float _fov_factor)
 {
 	scene = _scene;
     window_width = _window_width;
@@ -36,7 +36,7 @@ Engine3D::Engine3D(Scene& _scene, const int _window_width, const int _window_hei
     }
     
     // // on crée l’objet qui affichera la scène
-    ren = SDL_CreateRenderer(window, -1, 0);
+    SDL_Renderer *ren = SDL_CreateRenderer(window, -1, 0);
     if (!renderer) {
         fprintf(stderr, "Error creating SDL renderer.\n");
         running = false;
@@ -53,7 +53,7 @@ Engine3D::Setrunning(bool _running)
 
 Engine3D::render(float time, bool isAnimated)
 {
-	std::vector<Mesh*> meshs = scene.getMeshs();
+	std::vector<Mesh3D*> meshs = scene.getMeshs();
 
 	//On récupère les faces de chaque mesh
     std::vector<std::vector<Quad>> faces ;

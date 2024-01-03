@@ -3,45 +3,44 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <algorithm>
+#include <vector>
 
-struct vec3d
-{
-	float x, y, z;
-};
+#include "vector3D.hpp"
 
 struct triangle
 {
-	vec3d p[3];
+	Vector3D p[3];
 };
 
 struct Mesh3D
 {
-	vector<triangle> tris;
+	std::vector<triangle> tris;
 };
 
 struct Quad
 {
-    Mesh3D[2] quad;
+    Mesh3D quad[2];
 };
 
-class Scene
+class Scene3D
 {
     private:
         /**
          * @brief L'attribut meshs un un vecteur de pointeurs vers tous les mesh3D présents dans la scène.
          * Il est de type std::vector<Mesh3D*>.
          */
-        std::vector<Mesh*> meshs;
+        std::vector<Mesh3D*> meshs;
         /**
          * @brief L'attribut cameraPosition contient la position fixe de la caméra.
          * Il est de type Vector3.
          */
-        Vector3 cameraPosition;
+        Vector3D cameraPosition;
         /**
          * @brief L'attribut lookDirection repréesnte le sens dans lequel la caméra doit regarder
          * Il est de type Vector3.
          */
-        Vector3 cameraDirection;
+        Vector3D cameraDirection;
         /**
          * @brief L'attribut anim sert à savoir si l'animation doit se jouer ou non.
          * Il est de type bool.
@@ -52,14 +51,14 @@ class Scene
         /**
          * @brief Constructeur par défaut
          */
-        Scene();
+        Scene3D();
         /**
          * @brief Construit une nouvelle scène
          * 
          * @param _mesh (std::vector<Mesh3D*>))
          * @param _anim (bool)
          */
-        Scene(std::vector<Mesh3D*> _meshs, bool _anim);
+        Scene3D(std::vector<Mesh3D*> _meshs, bool _anim);
         /**
          * @brief Getter de l'attribut meshs.
          * 
@@ -86,25 +85,25 @@ class Scene
          * 
          * @param _cameraPosition (const Vector3&)
          */
-        void setCameraPosition(const Vector3& _cameraPosition);
+        void setCameraPosition(const Vector3D& _cameraPosition);
         /**
          * @brief Setter de l'attribut lookDirection.
          * 
          * @param _lookDirection (const Vector3&)
          */
-        void setCameraDirection(const Vector3& _lookDirection);
+        void setCameraDirection(const Vector3D& _lookDirection);
         /**
          * @brief Getter de l'attribut cameraPosition.
          * 
          * @return retourne l'attribut cameraPosition de l'instance (Vector3)
          */
-        Vector3 getCameraPosition() const;
+        Vector3D getCameraPosition() const;
         /**
          * @brief Getter de l'attribut lookDirection.
          * 
          * @return retourne l'attribut lookDirection de l'instance (Vector3)
          */
-        Vector3 getCameraDirection() const;
+        Vector3D getCameraDirection() const;
 };
 
 #endif
