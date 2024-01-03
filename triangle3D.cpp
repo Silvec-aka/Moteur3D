@@ -17,7 +17,7 @@ Triangle3D::Triangle3D(const Triangle3D& t)
     i=t.i;
 }
 
-Triangle3D::Triangle3D(Vector3D& _a, Vector3D& _b, Vector3D& _c)
+Triangle3D::Triangle3D(const Vector3D& _a,const Vector3D& _b,const Vector3D& _c)
 {
     a=_a; b=_b; c=_c; i=0;
 }

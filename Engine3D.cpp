@@ -78,7 +78,7 @@ void Engine3D::render(float time, bool isAnimated)
     matProj.initializeProj(window_width, window_height);
 
     //matrices de rotation
-    Matrix matRotZ, matRotX, matRotY,  matView;
+    Matrix matRotZ, matRotX, matRotY;
 
     //valeur de rotation
     float fTheta;
@@ -96,29 +96,25 @@ void Engine3D::render(float time, bool isAnimated)
 
     for (auto tri : triangles)
     {
-        Triangle3D newTriangle = tri.clone(); //A CHANGER constructeur de copie
-        newTriangle.i = tri.i;
+        Triangle3D newTriangle = Triangle3D(tri); //A CHANGER constructeur de copie
+        newTriangle.set_i(tri.get_i());
 
-        newTriangle.p[0].multiplyVector3ByMatrix(matRotX);
-        newTriangle.p[0].multiplyVector3ByMatrix(matRotZ);
-        newTriangle.p[1].multiplyVector3ByMatrix(matRotX);
-        newTriangle.p[1].multiplyVector3ByMatrix(matRotZ);
-        newTriangle.p[2].multiplyVector3ByMatrix(matRotX);
-        newTriangle.p[2].multiplyVector3ByMatrix(matRotZ);
+        newTriangle.multiplyByMatrix(matRotX);
+        newTriangle.multiplyByMatrix(matRotZ);
 
         //calcul de la normal du triangle
         Vector3D normaltri, line1, line2;
-        line1.set_x(newTriangle.p[1].get_x() - newTriangle.p[0].get_x());
-        line1.set_y(newTriangle.p[1].get_y() - newTriangle.p[0].get_y());
-        line1.set_z(newTriangle.p[1].get_z() - newTriangle.p[0].get_z());
+        line1.set_x(newTriangle.get_b().get_x() - newTriangle.get_a().get_x());
+        line1.set_y(newTriangle.get_b().get_y() - newTriangle.get_a().get_y());
+        line1.set_z(newTriangle.get_b().get_z() - newTriangle.get_a().get_z());
 
-        line2.set_x(newTriangle.p[2].get_x() - newTriangle.p[0].get_x());
-        line2.set_y(newTriangle.p[2].get_y() - newTriangle.p[0].get_y());
-        line2.set_z(newTriangle.p[2].get_z() - newTriangle.p[0].get_z());
+        line2.set_x(newTriangle.get_c().get_x() - newTriangle.get_a().get_x());
+        line2.set_y(newTriangle.get_c().get_y() - newTriangle.get_a().get_y());
+        line2.set_z(newTriangle.get_c().get_z() - newTriangle.get_a().get_z());
 
         normaltri = CrossProduct(line1,line2);
         normaltri.normalize();
-        Vector3D cameraRay = newTriangle.p[0]-cameraPos;
+        Vector3D cameraRay = newTriangle.get_a()-cameraPos;
         cameraRay.normalize();
 
         float res =   normaltri.get_x()*cameraRay.get_x() 
@@ -139,34 +135,34 @@ void Engine3D::render(float time, bool isAnimated)
             if(eclairement<0.1) eclairement= 0.1;
             if(eclairement>1) eclairement= 1;
 
-            newTriangle.p[0].multiplyVector3ByMatrix(matProj);
-            newTriangle.p[1].multiplyVector3ByMatrix(matProj);
-            newTriangle.p[2].multiplyVector3ByMatrix(matProj);
+            newTriangle.get_a().multiplyVector3ByMatrix(matProj);
+            newTriangle.get_b().multiplyVector3ByMatrix(matProj);
+            newTriangle.get_c().multiplyVector3ByMatrix(matProj);
 
             //newTriangle.scaleToViewAndWindow(window_width, window_height);
                 //A ENLEVER
-            newTriangle.p[0] += Vector3D(1,1,0);
-            newTriangle.p[1] += Vector3D(1,1,0);
-            newTriangle.p[2] += Vector3D(1,1,0);
-            newTriangle.p[0] = newTriangle.p[0] * Vector3D(0.5*((float) window_width),0.5*((float)window_height),1);
-            newTriangle.p[1] = newTriangle.p[1] * Vector3D(0.5*((float) window_width),0.5*((float)window_height),1);
-            newTriangle.p[2] = newTriangle.p[2] * Vector3D(0.5*((float) window_width),0.5*((float)window_height),1);
+            newTriangle.get_a() += Vector3D(1,1,0);
+            newTriangle.get_b() += Vector3D(1,1,0);
+            newTriangle.get_c() += Vector3D(1,1,0);
+            newTriangle.get_a() = newTriangle.get_a() * Vector3D(0.5*((float) window_width),0.5*((float)window_height),1);
+            newTriangle.get_b() = newTriangle.get_b() * Vector3D(0.5*((float) window_width),0.5*((float)window_height),1);
+            newTriangle.get_c() = newTriangle.get_c() * Vector3D(0.5*((float) window_width),0.5*((float)window_height),1);
 
             triangleProjs.push_back(newTriangle);
         }
         std::sort(triangleProjs.begin(), triangleProjs.end(), [](Triangle3D &t1, Triangle3D &t2)
         {
-            float z1 = (t1.p[0].get_z() + t1.p[1].get_z() + t1.p[2].get_z()) / 3.0f;
-            float z2 = (t2.p[0].get_z() + t2.p[1].get_z() + t2.p[2].get_z()) / 3.0f;
+            float z1 = (t1.get_a().get_z() + t1.get_b().get_z() + t1.get_c().get_z()) / 3.0f;
+            float z2 = (t2.get_a().get_z() + t2.get_b().get_z() + t2.get_c().get_z()) / 3.0f;
             return z1 > z2;
         });     
     }
 for (auto &triProjected : triangleProjs){
-        SDL_Point A = {(int) triProjected.p[0].get_x(),(int) triProjected.p[0].get_y()};
-        SDL_Point B = {(int) triProjected.p[1].get_x(),(int) triProjected.p[0].get_y()};
-        SDL_Point C = {(int) triProjected.p[2].get_x(),(int) triProjected.p[0].get_y()};
+        SDL_Point A = {(int) triProjected.get_a().get_x(),(int) triProjected.get_a().get_y()};
+        SDL_Point B = {(int) triProjected.get_b().get_x(),(int) triProjected.get_a().get_y()};
+        SDL_Point C = {(int) triProjected.get_c().get_x(),(int) triProjected.get_a().get_y()};
            
-        drawTriangle(A, B, C, triProjected.i);
+        drawTriangle(A, B, C, triProjected.get_i());
     }
 SDL_RenderPresent(renderer);
 }

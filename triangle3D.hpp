@@ -68,7 +68,7 @@ class Triangle3D
          * @param \a b (Vector3D)
          * @param \a c (Vector3D)
         */
-        Triangle3D(Vector3D& a, Vector3D& b, Vector3D& c);
+        Triangle3D(const Vector3D& a,const Vector3D& b,const Vector3D& c);
 
         /**
          * @brief Getter pour l'attribut \a a.
