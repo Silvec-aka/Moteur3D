@@ -8,7 +8,7 @@
  * @class Pave3D pave3D.hpp
  * @brief Pave3D est la classe qui hérite de Mesh3D, elle représente les pavés en 3 dimensions.
  * Elle se compose de :
- *      - 2 attributs privés :
+ *      - un attribut privé :
  *              - quads (std::vector<Quad3D>)
  *      - 2 constructeurs :
  *              - un constructeur de copie
