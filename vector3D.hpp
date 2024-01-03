@@ -173,7 +173,7 @@ class Vector3D
         void inverseXY();
 };
 
-std::ostream& operator<<(std::ostream& os, Vector3D v);
+std::ostream& operator<<(std::ostream& os, Vector3D vect);
 
 
 Vector3D operator+(const Vector3D& vect1, const Vector3D& vect2);
