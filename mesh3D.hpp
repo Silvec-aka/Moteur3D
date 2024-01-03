@@ -33,7 +33,7 @@ class Mesh3D
         */
         ~Mesh3D()=default;
 
-        virtual std::vector<Quad3D> get_Quads()
+        virtual std::vector<Quad3D> get_Quads() const
         {
             return quads;
         }
