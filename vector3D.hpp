@@ -147,17 +147,6 @@ class Vector3D
       */
       Vector3D multiplyVector3ByMatrix4(Vector3D vect_out, const Matrix& mat);
 
-      void operator+=(const Vector3D& vect);
-      void operator-=(const Vector3D& vect);
-      void operator*=(const float& a);
-      void operator/=(const float& a);
-
-      friend Vector3D operator+(const Vector3D& v1, const Vector3D& v2);
-      friend Vector3D operator-(const Vector3D& v1, const Vector3D& v2);
-      friend Vector3D operator*(const Vector3D& v1, const float& f);
-      friend Vector3D operator*(const float& f, const Vector3D& v1);
-      friend Vector3D operator*(const Vector3D& v1, const Vector3D& v2);
-
       /**
        * @brief Calcule le produit matriciel entre le vecteur en instance et la matrice en paramètre.
        * 
@@ -165,6 +154,17 @@ class Vector3D
        * @return le resulat du produit matriciel (vector3D)
       */
       Vector3D multiplyVector3ByMatrix4(const Matrix& mat);
+
+      void operator+=(const Vector3D& vect);
+      void operator-=(const Vector3D& vect);
+      void operator*=(const float& a);
+      void operator/=(const float& a);
+
+      friend Vector3D operator+(const Vector3D& vect1, const Vector3D& vect2);
+      friend Vector3D operator-(const Vector3D& vect1, const Vector3D& vect2);
+      friend Vector3D operator*(const Vector3D& vect1, const float& a);
+      friend Vector3D operator*(const float& a, const Vector3D& vect1);
+      friend Vector3D operator*(const Vector3D& vect1, const Vector3D& vect2);
 
       /**
          * @brief Mutliplie les attributs x et y par -1. 
@@ -176,22 +176,22 @@ class Vector3D
 std::ostream& operator<<(std::ostream& os, Vector3D v);
 
 
-Vector3D operator+(const Vector3D& v1, const Vector3D& v2);
-Vector3D operator-(const Vector3D& v1, const Vector3D& v2);
-Vector3D operator*(const Vector3D& v1, const float& f);
-Vector3D operator*(const float& f, const Vector3D& v1);
-Vector3D operator*(const Vector3D& v1, const Vector3D& v2);
-Vector3D operator/(const Vector3D& v1, const float& f);
-Vector3D operator/(const float& f, const Vector3D& v1);
+Vector3D operator+(const Vector3D& vect1, const Vector3D& vect2);
+Vector3D operator-(const Vector3D& vect1, const Vector3D& vect2);
+Vector3D operator*(const Vector3D& vect1, const float& f);
+Vector3D operator*(const float& a, const Vector3D& vect1);
+Vector3D operator*(const Vector3D& vect1, const Vector3D& vect2);
+Vector3D operator/(const Vector3D& vect1, const float& a);
+Vector3D operator/(const float& a, const Vector3D& vect1);
 
 
 /**
 * @brief Clacule le produit vectoriel entre deux vecteurs, retourne le résultat.
 * 
-* @param \a v1 (Vector3D)
-* @param \a v2 (Vector3D)
+* @param \a vect1 (Vector3D)
+* @param \a vect2 (Vector3D)
 * @return Le résultat du produit vectoriel (Vector3)
 */
-Vector3D CrossProduct(const Vector3D& v1, const Vector3D& v2);
+Vector3D CrossProduct(const Vector3D& vect1, const Vector3D& vect2);
 
 #endif
