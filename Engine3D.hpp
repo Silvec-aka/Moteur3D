@@ -6,11 +6,26 @@
 
 using namespace std;
 
+
+/**
+ * @class Engine3D Engine.hpp
+ * @brief La classe Engine3D initialise la fenêtre SDL et calcule toutes les positions des triangles à afficher dans la fenêtre.
+ * Elle se compose de :
+ *      - 7 attributs privés :
+ *          - \a scene (Scene)
+ *          - \a window (SDL_Window*)
+ *          - \a rendere (SDL_Renderer*)
+ *          - \a window_width (int)
+ *          - \a window_height (int)
+ *          - \a fov_factor (float)
+ *          - \a is_running (bool)
+ *          
+*/
 class Engine3D
 {
     private :
         /**
-         * @brief Cette variable correspond à la scène à afficher.
+         * @brief Cette attribut correspond à la scène à afficher.
          * Il est du type Scene.
          */
         Scene3D scene;
