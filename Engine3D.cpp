@@ -1,7 +1,4 @@
-#include "engine3D.hpp"+
-
-using namespace std;
-
+#include "engine3D.hpp"
 
 
 Engine3D::Engine3D(Scene3D& _scene, const int _window_width, const int _window_height, const float _fov_factor)

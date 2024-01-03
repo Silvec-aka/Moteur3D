@@ -88,7 +88,7 @@ class Engine3D
          * 
          * @return L'attribut running de l'instance (bool)
          */
-        bool isRunning();
+        bool is_running();
         /**
          * @brief Détruit la fenêtre et vide toute la mémoire utilisée.
          * 
