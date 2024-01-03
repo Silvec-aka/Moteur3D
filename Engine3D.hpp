@@ -2,6 +2,7 @@
 #define ENGINE3D_HPP
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <algorithm>
 #include "scene3D.hpp"
 
 using namespace std;
@@ -28,7 +29,7 @@ class Engine3D
          * @brief Cette attribut correspond à la scène à afficher.
          * Il est du type Scene.
          */
-        Scene scene;
+        Scene3D scene;
         /**
          * @brief L'attribut window est un pointeur vers une SDL_Window qui est la fenêtre de l'executable.
          * Il est du type SDL_Window*.
@@ -69,7 +70,7 @@ class Engine3D
          * @param _window_height (const int)
          * @param _fov_factor 
          */
-        Engine3D(Scene& _scene, const int _window_width, const int _window_height, const float _fov_factor);
+        Engine3D(Scene3D& _scene, const int _window_width, const int _window_height, const float _fov_factor);
         /**
          * @brief Setter de l'attribut running.
          * 
@@ -88,7 +89,7 @@ class Engine3D
          * 
          * @return L'attribut running de l'instance (bool)
          */
-        bool isRunning();
+        bool is_running();
         /**
          * @brief Détruit la fenêtre et vide toute la mémoire utilisée.
          * 
@@ -108,10 +109,9 @@ class Engine3D
          * @param v1 (SDL_Point)
          * @param v2 (SDL_Point)
          * @param v3 (SDL_Point)
-         * @param color (SDL_Color)
          * @param illumination (float)
          */
-        void drawTriangle(SDL_Point v1, SDL_Point v2, SDL_Point v3, SDL_Color color, float illumination);
+        void drawTriangle(SDL_Point v1, SDL_Point v2, SDL_Point v3, float i);
 };
 
 #endif 
