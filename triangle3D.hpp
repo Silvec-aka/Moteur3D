@@ -6,17 +6,17 @@
 /**
  * @class Triangle3D triangle.hpp
  * @brief Triangle3D est une classe qui représente les futures faces des meshs par des triangles,
- * ils sont représenté par 3 point \a a, \a b, \a c dans le sens trigonométrique.
+ * ils sont représenté par 3 point \a a, \a b, \a c dans le sens trigonométrique. Et un float i pour l'intensité.
  * Elle se compose de :
  *      - 4 atttributs privés :
  *          - \a a (Vector3)
  *          - \a b (Vector3)
  *          - \a c (Vector3)
- *          - \a color (SDL_Color)
+ *          - \a i (float)
  *      - 2 constructeurs
  *          - un constructeur pas défaut
  *          _ un constructeur de copie
- *          - un constructeur qui prend 3 Vector3D et 1 SDL_Color en entré
+ *          - un constructeur qui prend 3 Vector3D et 1 float en entré
  *      - des getters/setters pour chaques attributs
  *      - 4 méthodes publiques :
  *          - getCenterOfThirdSide()
@@ -43,10 +43,10 @@ class Triangle3D
         */
         Vector3D c;
         /**
-         * @brief \a color est la couleur du triangle.
-         * Son type est SDL_Color.
+         * @brief \a i est la couleur du triangle.
+         * Son type est float.
         */
-        SDL_Color color;
+        float i;
 
     public :
         /**
@@ -62,15 +62,13 @@ class Triangle3D
         Triangle3D(const Triangle3D& t);
 
         /**
-         * @brief Constructeur qui créé un triangle à partir de 3 point (dans le sens trigonométrique) 
-         * et d'une couleur.
+         * @brief Constructeur qui créé un triangle à partir de 3 point (dans le sens trigonométrique).
          * 
          * @param \a a (Vector3D)
          * @param \a b (Vector3D)
          * @param \a c (Vector3D)
-         * @param \a _co (SDL_Color)
         */
-        Triangle3D(Vector3D& a, Vector3D& b, Vector3D& c, const SDL_Color co);
+        Triangle3D(Vector3D& a, Vector3D& b, Vector3D& c);
 
         /**
          * @brief Getter pour l'attribut \a a.
@@ -94,11 +92,11 @@ class Triangle3D
         Vector3D& get_c();
 
         /**
-         * @brief Getter pour l'attribut \a color.
+         * @brief Getter pour l'attribut \a i.
          * 
-         * @return L'attribut \a color.
+         * @return L'attribut \a i.
         */
-        SDL_Color& get_color();
+        float get_i();
 
         /**
          * @brief Setter de \a a.
@@ -122,11 +120,11 @@ class Triangle3D
         void set_c(const Vector3D& _c);
 
         /**
-         * @brief Setter de \a color.
+         * @brief Setter de \a i.
          * 
-         * @param \a _color (SDL_Color)
+         * @param \a _i (float)
         */
-        void set_color(const SDL_Color& _color);
+        void set_i(const float _i);
 
         /**
          * @brief Calcule le centre du côté AC du triangle, pourra être la diagonale d'un Quad3D.

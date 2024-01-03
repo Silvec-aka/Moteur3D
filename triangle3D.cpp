@@ -14,12 +14,12 @@ Triangle3D::Triangle3D(const Triangle3D& t)
     Vector3D tmp_c(t.c.get_x(), t.c.get_y(), t.c.get_z());
     c=tmp_c;
 
-    color=t.color;
+    i=t.i;
 }
 
-Triangle3D::Triangle3D(Vector3D& _a, Vector3D& _b, Vector3D& _c, const SDL_Color _co)
+Triangle3D::Triangle3D(Vector3D& _a, Vector3D& _b, Vector3D& _c)
 {
-    a=_a; b=_b; c=_c; color=_co;
+    a=_a; b=_b; c=_c; i=0;
 }
 
 Vector3D& Triangle3D::get_a()
@@ -37,9 +37,9 @@ Vector3D& Triangle3D::get_c()
     return c;
 }
 
-SDL_Color& Triangle3D::get_color()
+float Triangle3D::get_i()
 {
-    return color;
+    return i;
 }
 
 void Triangle3D::set_a(const Vector3D& _a)
@@ -57,9 +57,9 @@ void Triangle3D::set_c(const Vector3D& _c)
     c=_c;
 }
 
-void Triangle3D::set_color(const SDL_Color& _color)
+void Triangle3D::set_i(const float _i)
 {
-    color=_color;
+    i=_i;
 }
 
 Vector3D Triangle3D::getCenterOfThirdSide()
@@ -104,7 +104,7 @@ void Triangle3D::operator*=(float f)
 
 Triangle3D Triangle3D::operator=(const Triangle3D& t)
 {
-    a=t.a; b=t.b; c=t.c; color=t.color;
+    a=t.a; b=t.b; c=t.c; i=t.i;
     return *this;
 }
 
