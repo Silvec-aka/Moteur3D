@@ -5,25 +5,9 @@
 #include <iostream>
 #include <vector>
 
-#include "triangle3D.hpp"
+#include "Mesh3D.hpp"
+#include "pave3D.hpp"
 
-
-struct Quad3D
-{
-    Triangle3D quad[2];
-
-    Quad3D(const Triangle3D& t1, const Triangle3D& t2)
-    {
-        quad[0] = t1;
-        quad[1] = t2;
-    }
-};
-
-
-struct Mesh3D
-{
-	std::vector<Quad3D> tris;
-};
 
 class Scene3D
 {

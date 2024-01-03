@@ -51,17 +51,16 @@ void Engine3D::Setrunning(bool _running)
 void Engine3D::render(float time, bool isAnimated)
 {
     
-	std::vector<Mesh3D*> meshs = scene.getMeshs();
+	std::vector<Mesh3D*> meshs = scene.getMeshs(); 
 
+    
 	//On récupère les faces de chaque mesh
     std::vector<std::vector<Quad3D>> faces;
-
-    std::cerr<<"hello1"<<std::endl;
-    for (int i=0; i< (int) meshs.size(); i++){
-        std::cerr<<faces.capacity()<<std::endl;
-        faces.push_back(meshs[i]->tris)/*->getQuads()*/;//A CHANGER
+    for (int i=0; i< (int) meshs.size(); i++)
+    {
+        faces.push_back(meshs[i]->get_Quads());
     }
-    std::cerr<<"hello2"<<std::endl;
+    std::cerr<<"t'es trop fort"<<std::endl;
     
     //On récupère les triangles de chaque face
     std::vector<Triangle3D> triangles;
@@ -69,8 +68,8 @@ void Engine3D::render(float time, bool isAnimated)
     {
         for (int j=0; j< (int) faces[i].size(); j++)
         {
-            triangles.push_back(faces[i][j].quad[0]);//A CHANGER
-            triangles.push_back(faces[i][j].quad[1]);
+            triangles.push_back(faces[i][j].get_trig1());
+            triangles.push_back(faces[i][j].get_trig2());
         }
     }
     //Défintion de la matrice (est normalisée donc renvoie toujours un résultat entre -1 et 1)
@@ -96,7 +95,7 @@ void Engine3D::render(float time, bool isAnimated)
 
     for (auto tri : triangles)
     {
-        Triangle3D newTriangle = Triangle3D(tri); //A CHANGER constructeur de copie
+        Triangle3D newTriangle = Triangle3D(tri); 
         newTriangle.set_i(tri.get_i());
 
         newTriangle.multiplyByMatrix(matRotX);
@@ -139,14 +138,7 @@ void Engine3D::render(float time, bool isAnimated)
             newTriangle.get_b().multiplyVector3ByMatrix(matProj);
             newTriangle.get_c().multiplyVector3ByMatrix(matProj);
 
-            //newTriangle.scaleToViewAndWindow(window_width, window_height);
-                //A ENLEVER
-            newTriangle.get_a() += Vector3D(1,1,0);
-            newTriangle.get_b() += Vector3D(1,1,0);
-            newTriangle.get_c() += Vector3D(1,1,0);
-            newTriangle.get_a() = newTriangle.get_a() * Vector3D(0.5*((float) window_width),0.5*((float)window_height),1);
-            newTriangle.get_b() = newTriangle.get_b() * Vector3D(0.5*((float) window_width),0.5*((float)window_height),1);
-            newTriangle.get_c() = newTriangle.get_c() * Vector3D(0.5*((float) window_width),0.5*((float)window_height),1);
+            newTriangle.scaleToViewAndWindow(window_width, window_height);
 
             triangleProjs.push_back(newTriangle);
         }
