@@ -112,7 +112,7 @@ void Engine3D::render(float time, bool isAnimated)
         line2.set_y(newTriangle.p[2].get_y() - newTriangle.p[0].get_y());
         line2.set_z(newTriangle.p[2].get_z() - newTriangle.p[0].get_z());
 
-        Vector3D normaltri = line1.crossProduct(line2);
+        normaltri = CrossProduct(line1,line2);
         normaltri.normalize();
         Vector3D cameraRay = newTriangle.p[0]-cameraPos;
         cameraRay.normalize();
