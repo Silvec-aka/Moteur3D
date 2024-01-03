@@ -2,6 +2,7 @@
 #define ENGINE3D_HPP
 #include <SDL2/SDL.h>
 #include <iostream>
+#include <algorithm>
 #include "scene3D.hpp"
 
 using namespace std;
@@ -108,10 +109,9 @@ class Engine3D
          * @param v1 (SDL_Point)
          * @param v2 (SDL_Point)
          * @param v3 (SDL_Point)
-         * @param color (SDL_Color)
          * @param illumination (float)
          */
-        void drawTriangle(SDL_Point v1, SDL_Point v2, SDL_Point v3);
+        void drawTriangle(SDL_Point v1, SDL_Point v2, SDL_Point v3, float i);
 };
 
 #endif 

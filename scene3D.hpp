@@ -3,24 +3,44 @@
 
 #include <SDL2/SDL.h>
 #include <iostream>
-#include <algorithm>
 #include <vector>
 
 #include "vector3D.hpp"
 
-struct triangle
+struct Triangle3D
 {
 	Vector3D p[3];
+    float i;
+    Triangle3D() = default;
+    Triangle3D(const Vector3D& v1, const Vector3D& v2, const Vector3D& v3)
+    {
+        p[0] = v1;
+        p[1] = v2;
+        p[2] = v3;
+        i=0;
+    };
+
+    Triangle3D clone() const
+    {
+        return Triangle3D(p[0], p[1], p[2]);
+    };
 };
+
+struct Quad3D
+{
+    Triangle3D quad[2];
+
+    Quad3D(const Triangle3D& t1, const Triangle3D& t2)
+    {
+        quad[0] = t1;
+        quad[1] = t2;
+    }
+};
+
 
 struct Mesh3D
 {
-	std::vector<triangle> tris;
-};
-
-struct Quad
-{
-    Mesh3D quad[2];
+	std::vector<Quad3D> tris;
 };
 
 class Scene3D
