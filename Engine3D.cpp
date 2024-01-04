@@ -165,7 +165,7 @@ void Engine3D::render(float time, bool isAnimated)
         {
             float z1 = (t1.get_a().get_z() + t1.get_b().get_z() + t1.get_c().get_z()) / 3.0f;
             float z2 = (t2.get_a().get_z() + t2.get_b().get_z() + t2.get_c().get_z()) / 3.0f;
-            return z1 > z2;
+            return z1 < z2;
         });     
     }
 for (auto &triProjected : triangleProjs){
