@@ -2,40 +2,6 @@
 
 Scene3D::Scene3D()
 {
-    Mesh3D cube;
-
-    Quad3D face_sud = Quad3D(
-        Triangle3D(Vector3D(0.0f, 0.0f, 0.0f),    Vector3D(0.0f, 1.0f, 0.0f),    Vector3D(1.0f, 1.0f, 0.0f)),
-        Triangle3D(Vector3D(0.0f, 0.0f, 0.0f),    Vector3D(1.0f, 1.0f, 0.0f),    Vector3D(1.0f, 0.0f, 0.0f)) 
-    );
-    
-    Quad3D face_est = Quad3D(
-        Triangle3D(Vector3D(1.0f, 0.0f, 0.0f),    Vector3D(1.0f, 1.0f, 0.0f),    Vector3D(1.0f, 1.0f, 1.0f)),
-        Triangle3D(Vector3D(1.0f, 0.0f, 0.0f),    Vector3D(1.0f, 1.0f, 1.0f),    Vector3D(1.0f, 0.0f, 1.0f)) 
-    );
-
-    Quad3D face_nord = Quad3D(
-        Triangle3D(Vector3D(1.0f, 0.0f, 1.0f),    Vector3D(1.0f, 1.0f, 1.0f),    Vector3D(0.0f, 1.0f, 1.0f)),
-        Triangle3D(Vector3D(1.0f, 0.0f, 1.0f),    Vector3D(0.0f, 1.0f, 1.0f),    Vector3D(0.0f, 0.0f, 1.0f)) 
-    );
-
-    Quad3D face_ouest = Quad3D(
-        Triangle3D(Vector3D(0.0f, 0.0f, 1.0f),    Vector3D(0.0f, 1.0f, 1.0f),    Vector3D(0.0f, 1.0f, 0.0f)),
-        Triangle3D(Vector3D(0.0f, 0.0f, 1.0f),    Vector3D(0.0f, 1.0f, 0.0f),    Vector3D(0.0f, 0.0f, 0.0f)) 
-    );
-
-    Quad3D face_top = Quad3D(
-        Triangle3D(Vector3D(0.0f, 1.0f, 0.0f),    Vector3D(0.0f, 1.0f, 1.0f),    Vector3D(1.0f, 1.0f, 1.0f)),
-        Triangle3D(Vector3D(0.0f, 1.0f, 0.0f),    Vector3D(1.0f, 1.0f, 1.0f),    Vector3D(1.0f, 1.0f, 0.0f)) 
-    );
-
-    Quad3D face_bottom = Quad3D(
-        Triangle3D(Vector3D(1.0f, 0.0f, 1.0f),    Vector3D(0.0f, 0.0f, 1.0f),    Vector3D(0.0f, 0.0f, 0.0f)),
-        Triangle3D(Vector3D(1.0f, 0.0f, 1.0f),    Vector3D(0.0f, 0.0f, 0.0f),    Vector3D(1.0f, 0.0f, 0.0f)) 
-    );
-
-    cube.tris = {face_sud,face_est,face_nord,face_ouest,face_top,face_bottom};
-
     meshs = std::vector<Mesh3D*>();
     meshs.push_back(&cube);
 
