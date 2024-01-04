@@ -27,7 +27,7 @@ class Quad3D
         */
         Triangle3D trig1;
         /**
-         * @brief \a trigé est le second triangle du quadrialtre.
+         * @brief \a trig2 est le second triangle du quadrialtre.
          * Son type est Triangle3D.
         */
         Triangle3D trig2;
