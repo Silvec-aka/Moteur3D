@@ -8,7 +8,7 @@ Matrix::Matrix()
     {
         for (int j = 0; j < 4; j++)
         {
-            data[i][j] = 1.0f;
+            data[i][j] = 0.0f;
         }
     }
 }

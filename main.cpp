@@ -27,14 +27,14 @@ int main()
     
     Scene3D scene = Scene3D();
     
-    Vector3D v1(1, 0, 0); //Test avec le constructeur qui prend 8 vector3
-    Vector3D v2(0, 1, 0);
-    Vector3D v3(0, 0, 0);
-    Vector3D v4(0, 0, 0);
-    Vector3D v5(0, 0, 0);
-    Vector3D v6(0, 0, 0);
-    Vector3D v7(0, 0, 0);
-    Vector3D v8(0, 0, 0);
+    Vector3D v1(1, 2, 1); //Test avec le constructeur qui prend 8 vector3
+    Vector3D v2(1, 1, 1);
+    Vector3D v3(2, 1, 1);
+    Vector3D v4(2, 2, 1);
+    Vector3D v5(2, 1, 2);
+    Vector3D v6(2, 2, 2);
+    Vector3D v7(1, 1, 2);
+    Vector3D v8(1, 2, 2);
     Pave3D cube = Pave3D(v1,v2,v3,v4,v5,v6,v7,v8);
     
     scene.addMesh(&cube);

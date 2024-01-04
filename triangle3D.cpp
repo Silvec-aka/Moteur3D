@@ -22,22 +22,22 @@ Triangle3D::Triangle3D(const Vector3D& _a,const Vector3D& _b,const Vector3D& _c)
     a=_a; b=_b; c=_c; i=0;
 }
 
-Vector3D& Triangle3D::get_a()
+Vector3D Triangle3D::get_a() const
 {
     return a;
 }
 
-Vector3D& Triangle3D::get_b()
+Vector3D Triangle3D::get_b() const
 {
     return b;
 }
 
-Vector3D& Triangle3D::get_c()
+Vector3D Triangle3D::get_c() const
 {
     return c;
 }
 
-float Triangle3D::get_i()
+float Triangle3D::get_i() const
 {
     return i;
 }
@@ -108,8 +108,8 @@ Triangle3D Triangle3D::operator=(const Triangle3D& t)
     return *this;
 }
 
-std::ostream& operator<<(std::ostream& os, Triangle3D& t)
+std::ostream& operator<<(std::ostream& os, const Triangle3D& t)
 {
-    os << t.get_a() << " | " << t.get_b() << " | " << t.get_c() << std::endl;
+    os << " | " << t.get_a() << " | " << t.get_b() << " | " << t.get_c() << std::endl;
     return os;
 }

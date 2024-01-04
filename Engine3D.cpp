@@ -45,7 +45,7 @@ Engine3D::Engine3D(Scene3D& _scene, const int _window_width, const int _window_h
 
     // on efface la fenêtre
     SDL_RenderClear(renderer);
-    // on affiche la scène
+    // // on affiche la scène
     // SDL_RenderDrawLine(renderer, 10, 470, 320, 10);
     // SDL_RenderDrawLine(renderer, 630, 470, 320, 10);
     // SDL_RenderDrawLine(renderer, 10, 470, 630, 470);
@@ -53,6 +53,8 @@ Engine3D::Engine3D(Scene3D& _scene, const int _window_width, const int _window_h
     // SDL_Point B = {(int) 630 ,(int) 470};
     // SDL_Point C = {(int) 10,(int) 470};
     // drawTriangle(A,B,C,1);
+    // SDL_SetRenderDrawColor(renderer,255,255,255,SDL_ALPHA_OPAQUE);
+    // SDL_RenderDrawPoint(renderer, 500, 1);
     SDL_RenderPresent(renderer);
 }
 
@@ -64,10 +66,12 @@ void Engine3D::Setrunning(bool _running)
 void Engine3D::render(float time, bool isAnimated)
 {
     // on efface la fenêtre
+    SDL_SetRenderDrawColor(renderer, 0, 0, 0,SDL_ALPHA_OPAQUE);
+    SDL_RenderClear(renderer);
 
 	std::vector<Mesh3D*> meshs = scene.getMeshs(); 
 
-    std::cerr<< meshs[0]->get_Quads()[0].get_trig2() <<std::endl;
+    // std::cerr<< meshs[0]->get_Quads()[0].get_trig2() <<std::endl;
 	//On récupère les faces de chaque mesh
     std::vector<std::vector<Quad3D>> faces;
     for (int i=0; i< (int) meshs.size(); i++)
@@ -88,9 +92,9 @@ void Engine3D::render(float time, bool isAnimated)
     //Défintion de la matrice (est normalisée donc renvoie toujours un résultat entre -1 et 1)
     Matrix matProj;
     matProj.initializeProj(window_width, window_height);
-
     //matrices de rotation
     Matrix matRotZ, matRotX, matRotY;
+
 
     //valeur de rotation
     float fTheta;
@@ -111,7 +115,8 @@ void Engine3D::render(float time, bool isAnimated)
         Triangle3D newTriangle = Triangle3D(tri); 
         newTriangle.set_i(tri.get_i());
 
-        newTriangle.multiplyByMatrix(matRotX);
+        //on applique la rotation au triangle
+        newTriangle.multiplyByMatrix(matRotY);
         newTriangle.multiplyByMatrix(matRotZ);
 
         //calcul de la normal du triangle
@@ -126,14 +131,15 @@ void Engine3D::render(float time, bool isAnimated)
 
         normaltri = CrossProduct(line1,line2);
         normaltri.normalize();
-        Vector3D cameraRay = newTriangle.get_a()-cameraPos;
+
+        Vector3D cameraRay = newTriangle.get_b()-cameraPos;
         cameraRay.normalize();
 
         float res =   normaltri.get_x()*cameraRay.get_x() 
                     + normaltri.get_y()*cameraRay.get_y() 
                     + normaltri.get_z()*cameraRay.get_z();
         
-        if (res>0)
+        if (res<0)
         {
             // Illumination
             Vector3D light_direction = Vector3D(0.0f, 0.0f, -1.0f);
@@ -149,9 +155,7 @@ void Engine3D::render(float time, bool isAnimated)
 
             newTriangle.set_i(eclairement);
 
-            newTriangle.get_a().multiplyVector3ByMatrix(matProj);
-            newTriangle.get_b().multiplyVector3ByMatrix(matProj);
-            newTriangle.get_c().multiplyVector3ByMatrix(matProj);
+            newTriangle.multiplyByMatrix(matProj);
 
             newTriangle.scaleToViewAndWindow(window_width, window_height);
 
@@ -197,8 +201,6 @@ void Engine3D::fillTriangle(SDL_Point v1, SDL_Point v2, SDL_Point v3) //ça marc
     if (v2.y > v3.y) std::swap(v2, v3);
     // Déterminer la zone de remplissage du triangle
     int total_height = v3.y - v1.y;
-    std::cerr<<"v3 = "<<v3.y<<"v1 = "<<v1.y<<std::endl;
-    std::cerr<<total_height<<std::endl;
     for (int i = 0; i < total_height; i++)
     {
         bool second_half = i > v2.y - v1.y || v2.y == v1.y;
@@ -210,10 +212,8 @@ void Engine3D::fillTriangle(SDL_Point v1, SDL_Point v2, SDL_Point v3) //ça marc
         if (A.x > B.x) std::swap(A, B);
         for (int j = A.x; j <= B.x; j++)
         {
-            SDL_RenderDrawPoint(renderer, j, A.y);
-            SDL_RenderDrawPoint(renderer, 10, 470);
+            SDL_RenderDrawPoint(renderer, j, A.y);;
         }
-        
     }
 }
 
@@ -223,4 +223,12 @@ void Engine3D::drawTriangle(SDL_Point v1, SDL_Point v2, SDL_Point v3, float ecla
     SDL_SetRenderDrawColor(renderer,color.r * eclairement, color.g * eclairement, color.b * eclairement, color.a); //ombre
     //remplie le triangle
     fillTriangle(v1,v2,v3);
+
+    SDL_SetRenderDrawColor(renderer,255,255,255,SDL_ALPHA_OPAQUE);
+    int line_thickness = 1;
+        for (int i = 0; i < line_thickness; i++)
+        {   
+            SDL_RenderDrawLine(renderer, v1.x + i, v1.y, v2.x + i, v2.y);
+            SDL_RenderDrawLine(renderer, v2.x + i, v2.y, v3.x + i, v3.y);
+        }
 }

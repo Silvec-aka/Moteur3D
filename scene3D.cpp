@@ -3,7 +3,7 @@
 Scene3D::Scene3D()
 {
     meshs = std::vector<Mesh3D*>();
-    cameraPosition = Vector3D(0, 0, -4);
+    cameraPosition = Vector3D(1, 1, -4);
     cameraDirection = Vector3D(0, 45, 0);
 
     anim=true;

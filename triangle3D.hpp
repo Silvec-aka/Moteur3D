@@ -75,28 +75,28 @@ class Triangle3D
          * 
          * @return L'attribut \a a.
         */
-        Vector3D& get_a();
+        Vector3D get_a() const;
 
         /**
          * @brief Getter pour l'attribut \a b.
          * 
          * @return L'attribut \a b.
         */
-        Vector3D& get_b();
+        Vector3D get_b() const;
 
         /**
          * @brief Getter pour l'attribut \a c.
          * 
          * @return L'attribut \a c.
         */
-        Vector3D& get_c();
+        Vector3D get_c() const;
 
         /**
          * @brief Getter pour l'attribut \a i.
          * 
          * @return L'attribut \a i.
         */
-        float get_i();
+        float get_i() const;
 
         /**
          * @brief Setter de \a a.
@@ -167,7 +167,7 @@ class Triangle3D
 };
 
 
-std::ostream& operator<<(std::ostream& os, Triangle3D& t);
+std::ostream& operator<<(std::ostream& os,const Triangle3D& t);
 
 
 #endif
