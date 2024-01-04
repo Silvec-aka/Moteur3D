@@ -13,22 +13,22 @@ class Scene3D
 {
     private:
         /**
-         * @brief L'attribut meshs un un vecteur de pointeurs vers tous les mesh3D présents dans la scène.
+         * @brief L'attribut \a meshs un un vecteur de pointeurs vers tous les mesh3D présents dans la scène.
          * Il est de type std::vector<Mesh3D*>.
          */
         std::vector<Mesh3D*> meshs;
         /**
-         * @brief L'attribut cameraPosition contient la position fixe de la caméra.
+         * @brief L'attribut \a cameraPosition contient la position fixe de la caméra.
          * Il est de type Vector3.
          */
         Vector3D cameraPosition;
         /**
-         * @brief L'attribut lookDirection repréesnte le sens dans lequel la caméra doit regarder
+         * @brief L'attribut \a lookDirection repréesnte le sens dans lequel la caméra doit regarder
          * Il est de type Vector3.
          */
         Vector3D cameraDirection;
         /**
-         * @brief L'attribut anim sert à savoir si l'animation doit se jouer ou non.
+         * @brief L'attribut \a anim sert à savoir si l'animation doit se jouer ou non.
          * Il est de type bool.
          */
         bool anim;
@@ -41,53 +41,53 @@ class Scene3D
         /**
          * @brief Construit une nouvelle scène
          * 
-         * @param _mesh (std::vector<Mesh3D*>))
-         * @param _anim (bool)
+         * @param \a _mesh (std::vector<Mesh3D*>))
+         * @param \a _anim (bool)
          */
         Scene3D(std::vector<Mesh3D*> _meshs, bool _anim);
         /**
-         * @brief Getter de l'attribut meshs.
+         * @brief Getter de l'attribut \a meshs.
          * 
-         * @return retourne l'attribut meshs de l'instance (std::vector<Mesh3D*>)
+         * @return retourne l'attribut \a meshs de l'instance (std::vector<Mesh3D*>)
          */
         std::vector<Mesh3D*> getMeshs() const;
         /**
-         * @brief Getter de l'attribut anim.
+         * @brief Getter de l'attribut \a anim.
          * 
-         * @return retourne l'attribut anim de l'instance (bool)
+         * @return retourne l'attribut \a anim de l'instance (bool)
          */
         bool getAnim();
         /**
          * @brief Ajoute un pointeur vers un mesh à la scène
          * 
-         * @param _mesh (mesh3D*)
+         * @param \a _mesh (mesh3D*)
          */
         void addMesh(Mesh3D* _mesh);
 
 
                                  //----------CAMERA---------------//
         /**
-         * @brief Setter de l'attribut cameraPosition.
+         * @brief Setter de l'attribut \a cameraPosition.
          * 
-         * @param _cameraPosition (const Vector3&)
+         * @param \a _cameraPosition (const Vector3&)
          */
         void setCameraPosition(const Vector3D& _cameraPosition);
         /**
-         * @brief Setter de l'attribut lookDirection.
+         * @brief Setter de l'attribut \a lookDirection.
          * 
-         * @param _lookDirection (const Vector3&)
+         * @param \a _lookDirection (const Vector3&)
          */
         void setCameraDirection(const Vector3D& _lookDirection);
         /**
-         * @brief Getter de l'attribut cameraPosition.
+         * @brief Getter de l'attribut \a cameraPosition.
          * 
-         * @return retourne l'attribut cameraPosition de l'instance (Vector3)
+         * @return retourne l'attribut \a cameraPosition de l'instance (Vector3)
          */
         Vector3D getCameraPosition() const;
         /**
-         * @brief Getter de l'attribut lookDirection.
+         * @brief Getter de l'attribut \a lookDirection.
          * 
-         * @return retourne l'attribut lookDirection de l'instance (Vector3)
+         * @return retourne l'attribut \a lookDirection de l'instance (Vector3)
          */
         Vector3D getCameraDirection() const;
 };
