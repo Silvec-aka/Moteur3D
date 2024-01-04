@@ -19,7 +19,7 @@ using namespace std;
  *          - \a window_width (int)
  *          - \a window_height (int)
  *          - \a fov_factor (float)
- *          - \a is_running (bool)
+ *          - \a running (bool)
  *          
 */
 class Engine3D

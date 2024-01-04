@@ -109,7 +109,7 @@ void Engine3D::render(float time, bool isAnimated)
         newTriangle.multiplyByMatrix(matRotY);
         // newTriangle.multiplyByMatrix(matRotZ);
 
-        //calcul de la normal du triangle
+        //calcul de la normal d--u triangle
         Vector3D normaltri, line1, line2;
         line1.set_x(newTriangle.get_b().get_x() - newTriangle.get_a().get_x());
         line1.set_y(newTriangle.get_b().get_y() - newTriangle.get_a().get_y());
