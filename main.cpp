@@ -1,6 +1,7 @@
 #include <iostream>
 #include "engine3D.hpp"
-
+#include "pave3D.hpp"
+#include "sphere3D.hpp"
 /**
  * @brief Ferme la fenêtre et quitte le programme si l'utiliateur clique sur la croix ou appuie sur Echap.
  * 
@@ -26,19 +27,28 @@ int main()
 {
     
     Scene3D scene = Scene3D();
-    
-    Vector3D v1(1, 2, 1); //Test avec le constructeur qui prend 8 vector3
-    Vector3D v2(1, 1, 1);
-    Vector3D v3(2, 1, 1);
-    Vector3D v4(2, 2, 1);
-    Vector3D v5(2, 1, 2);
-    Vector3D v6(2, 2, 2);
-    Vector3D v7(1, 1, 2);
-    Vector3D v8(1, 2, 2);
-    Pave3D cube = Pave3D(v1,v2,v3,v4,v5,v6,v7,v8);
-    
+
+    //creation d'un cube
+
+    Vector3D v1(-2,-1,-1); //Test avec le constructeur qui prend 8 vector3D
+    Vector3D v2(-2,1,-1);
+    Vector3D v3(0,1,-1);
+    Vector3D v4(0,-1,-1);
+    Vector3D v5(0,1,1);
+    Vector3D v6(0,-1,1);
+    Vector3D v7(-2,1,1);
+    Vector3D v8(-2,-1,1);
+
+    Vector3D tr(0,0,1);
+    Pave3D cube = Pave3D(v1/2+tr,v2/2+tr,v3/2+tr,v4/2+tr,v5/2+tr,v6/2+tr,v7/2+tr,v8/2+tr); 
     scene.addMesh(&cube);
+    //creation d'une sphere
+
+    Vector3D v0(0,0,-1);
+    Sphere3D sphere = Sphere3D(v0,1,10);
     
+    
+    scene.addMesh(&sphere);
     Engine3D engine = Engine3D(scene,800,600,640.0f);
 
     float t = 0.0f;

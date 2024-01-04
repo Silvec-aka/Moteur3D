@@ -33,7 +33,7 @@ Engine3D::Engine3D(Scene3D& _scene, const int _window_width, const int _window_h
         return;
     }
     
-    // // on crée l’objet qui affichera la scène
+    // on crée l’objet qui affichera la scène
     renderer = SDL_CreateRenderer(window, -1, 0);
     if (!renderer) {
         fprintf(stderr, "Error creating SDL renderer.\n");
@@ -45,16 +45,7 @@ Engine3D::Engine3D(Scene3D& _scene, const int _window_width, const int _window_h
 
     // on efface la fenêtre
     SDL_RenderClear(renderer);
-    // // on affiche la scène
-    // SDL_RenderDrawLine(renderer, 10, 470, 320, 10);
-    // SDL_RenderDrawLine(renderer, 630, 470, 320, 10);
-    // SDL_RenderDrawLine(renderer, 10, 470, 630, 470);
-    // SDL_Point A = {(int) 320,(int) 10};
-    // SDL_Point B = {(int) 630 ,(int) 470};
-    // SDL_Point C = {(int) 10,(int) 470};
-    // drawTriangle(A,B,C,1);
-    // SDL_SetRenderDrawColor(renderer,255,255,255,SDL_ALPHA_OPAQUE);
-    // SDL_RenderDrawPoint(renderer, 500, 1);
+    //on l'affiche
     SDL_RenderPresent(renderer);
 }
 
@@ -71,7 +62,6 @@ void Engine3D::render(float time, bool isAnimated)
 
 	std::vector<Mesh3D*> meshs = scene.getMeshs(); 
 
-    // std::cerr<< meshs[0]->get_Quads()[0].get_trig2() <<std::endl;
 	//On récupère les faces de chaque mesh
     std::vector<std::vector<Quad3D>> faces;
     for (int i=0; i< (int) meshs.size(); i++)
@@ -117,7 +107,7 @@ void Engine3D::render(float time, bool isAnimated)
 
         //on applique la rotation au triangle
         newTriangle.multiplyByMatrix(matRotY);
-        newTriangle.multiplyByMatrix(matRotZ);
+        // newTriangle.multiplyByMatrix(matRotZ);
 
         //calcul de la normal du triangle
         Vector3D normaltri, line1, line2;
@@ -139,16 +129,16 @@ void Engine3D::render(float time, bool isAnimated)
                     + normaltri.get_y()*cameraRay.get_y() 
                     + normaltri.get_z()*cameraRay.get_z();
         
-        if (res<0)
+        if (res<=0)
         {
             // Illumination
-            Vector3D light_direction = Vector3D(0.0f, 0.0f, -1.0f);
-            float intensite = 200.0f;
+            Vector3D light_direction = Vector3D(0.0f, -0.5f, -2.0f);
+            float intensite = 5.0f;
             
-
-            float lightRayMagnitude = light_direction.magnitude();
-            float dot_l = normaltri.dotProduct(light_direction);
-            float theta = std::acos(dot_l / (normaltri.magnitude() * light_direction.magnitude()));      //E=(I/d^2)*cos(theta) = formule de l'éclairemnt      
+            Vector3D lightRay = newTriangle.getCenterOfThirdSide() - light_direction;
+            float lightRayMagnitude = lightRay.magnitude();
+            float dot_l = normaltri.dotProduct(lightRay);
+            float theta = std::acos(dot_l / (normaltri.magnitude() * lightRay.magnitude()));      //E=(I/d^2)*cos(theta) = formule de l'éclairemnt      
             float eclairement = intensite / pow(lightRayMagnitude,2) * cos(theta);
             if(eclairement<0.1) eclairement= 0.1;
             if(eclairement>1) eclairement= 1;
@@ -165,7 +155,7 @@ void Engine3D::render(float time, bool isAnimated)
         {
             float z1 = (t1.get_a().get_z() + t1.get_b().get_z() + t1.get_c().get_z()) / 3.0f;
             float z2 = (t2.get_a().get_z() + t2.get_b().get_z() + t2.get_c().get_z()) / 3.0f;
-            return z1 > z2;
+            return z1 < z2;
         });     
     }
 for (auto &triProjected : triangleProjs){
@@ -185,14 +175,13 @@ bool Engine3D::is_running()
 
 void Engine3D::destroy_window()
 {
-    //std::cout << "Destroy window" << std::endl;
     SDL_RenderClear(renderer);
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
 }
 
-void Engine3D::fillTriangle(SDL_Point v1, SDL_Point v2, SDL_Point v3) //ça marche
+void Engine3D::fillTriangle(SDL_Point v1, SDL_Point v2, SDL_Point v3)
 {
     
     // Trier les sommets du triangle par ordre croissant de y
