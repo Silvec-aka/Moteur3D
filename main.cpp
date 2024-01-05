@@ -30,7 +30,7 @@ int main()
 
     //creation d'un cube
 
-    Vector3D v1(-2,-1,-1); //Test avec le constructeur qui prend 8 vector3D
+    Vector3D v1(-2,-1,-1);
     Vector3D v2(-2,1,-1);
     Vector3D v3(0,1,-1);
     Vector3D v4(0,-1,-1);
