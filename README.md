@@ -5,7 +5,6 @@
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
-- [License](#license)
 - [Acknowledgments](#acknowledgments)
 
 ---
