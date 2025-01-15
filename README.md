@@ -10,7 +10,7 @@
 ---
 
 ## Project Overview
-**Moteur3D-PRAP** is a 3D engine developed as a study project. The engine is implemented in C++ and provides functionalities for creating and manipulating 3D objects, rendering scenes, and performing various mathematical operations essential for 3D graphics.
+**Moteur3D-PRAP** is a 3D engine developed as a study project. The engine is implemented in C++ and provides functionalities for creating 3D objects, rendering scenes, and performing various mathematical operations essential for 3D graphics.
 
 ---
 
